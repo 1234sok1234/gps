@@ -1,13 +1,19 @@
 package pl.kasperdubiel.gpswersja2;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.arch.persistence.room.RoomMasterTable.TABLE_NAME;
 
 public class RecycleViewActivity extends Activity
 {
@@ -24,6 +30,27 @@ public class RecycleViewActivity extends Activity
 		rv.setHasFixedSize(true);
 		initializeData();
 		initializeAdapter();
+		ItemTouchHelper.SimpleCallback simpleCallback=new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+		{
+			@Override
+			public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1)
+			{
+				return false;
+			}
+
+			@Override
+			public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+				final int position = viewHolder.getAdapterPosition(); //get position which is swipe
+
+				if (direction == ItemTouchHelper.LEFT) {    //if swipe left
+
+					AlertDialog.Builder builder = new AlertDialog.Builder(RecycleViewActivity.this); //alert for confirm to delete
+					builder.setMessage("Are you sure to delete?");    //set messag
+				}
+			}
+		};
+		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+		itemTouchHelper.attachToRecyclerView(rv);
 
 	}
 
@@ -40,7 +67,7 @@ public class RecycleViewActivity extends Activity
 
 	private void initializeAdapter()
 	{
-		RVAdapter adapter = new RVAdapter(persons);
+		RVAdapter adapter = new RVAdapter(persons,this);
 		rv.setAdapter(adapter);
 	}
 }

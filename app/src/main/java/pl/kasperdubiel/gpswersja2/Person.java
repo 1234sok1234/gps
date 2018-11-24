@@ -12,4 +12,19 @@ public class Person
 		this.age = age;
 		this.photoid = photoid;
 	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getAge()
+	{
+		return age;
+	}
+
+	public int getPhotoid()
+	{
+		return photoid;
+	}
 }
