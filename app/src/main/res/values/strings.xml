@@ -4,5 +4,12 @@
     <string name="action_add_favourite">Add to Favourites</string>
     <string name="action_play_next">Play Next</string>
     <string name="backdrop_title">LOVE MUSIC</string>
-    <string name="backdrop_subtitle">This season top 20 albums</string>
+    <string name="Delete_all_Records">Delete all Records</string>
+    <string name="Save">Save</string>
+    <string name="Title">Title</string>
+    <string name="Description">Description</string>
+    <string name="Priority">Priority:</string>
+    <string name="New_workout">New workout</string>
+
+
 </resources>
