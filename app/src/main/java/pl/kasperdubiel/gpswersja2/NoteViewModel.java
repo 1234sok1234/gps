@@ -1,4 +1,4 @@
-package pl.kasperdubiel.gpswersja2.jclass;
+package pl.kasperdubiel.gpswersja2;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,6 +6,9 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import java.util.List;
+
+import pl.kasperdubiel.gpswersja2.Note;
+import pl.kasperdubiel.gpswersja2.NoteRepository;
 
 public class NoteViewModel extends AndroidViewModel
 {

@@ -1,4 +1,4 @@
-package pl.kasperdubiel.gpswersja2.jclass;
+package pl.kasperdubiel.gpswersja2;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

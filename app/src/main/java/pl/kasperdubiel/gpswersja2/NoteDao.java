@@ -1,4 +1,4 @@
-package pl.kasperdubiel.gpswersja2.jclass;
+package pl.kasperdubiel.gpswersja2;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -8,6 +8,8 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+
+import pl.kasperdubiel.gpswersja2.Note;
 
 @Dao
 public interface NoteDao
