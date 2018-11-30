@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setHasFixedSize(true);
 		final NoteAdapter adapter = new NoteAdapter();
 		recyclerView.setAdapter(adapter);
+		//xd
 
 		noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
 		noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>()
