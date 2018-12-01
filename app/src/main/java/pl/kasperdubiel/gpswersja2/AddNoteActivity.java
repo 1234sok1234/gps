@@ -102,7 +102,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 		Intent serviceIntent = new Intent(this, BackgroudService.class);
 		serviceIntent.putExtra("inputExtra", input);
-		serviceIntent.putExtra("inputExtra2", "23");
+		serviceIntent.putExtra("inputExtra2", "5000");
 
 		ContextCompat.startForegroundService(this, serviceIntent);
 	}
@@ -113,7 +113,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 		Intent serviceIntent = new Intent(this, BackgroudService.class);
 		serviceIntent.putExtra("inputExtra", "savovalem");
-		serviceIntent.putExtra("inputExtra2", "23");
+		serviceIntent.putExtra("inputExtra2", "2000");
 
 		ContextCompat.startForegroundService(this, serviceIntent);
 	}
