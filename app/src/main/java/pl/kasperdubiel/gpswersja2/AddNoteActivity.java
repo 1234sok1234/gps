@@ -99,6 +99,10 @@ public class AddNoteActivity extends AppCompatActivity
 	public void startService(View v)
 	{
 		String input = editTextInput.getText().toString();
+		if(input.matches(""))
+		{
+			input="1000";
+		}
 
 		Intent serviceIntent = new Intent(this, BackgroudService.class);
 		serviceIntent.putExtra("inputExtra", input);
