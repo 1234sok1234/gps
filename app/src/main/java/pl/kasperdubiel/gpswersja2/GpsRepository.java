@@ -16,7 +16,7 @@ public class GpsRepository
 	private GpsDao gpsDao;
 	private LiveData<List<Gps>> allGps;
 
-/*
+
 	public GpsRepository(Application application)
 	{
 		NoteDatabase database = NoteDatabase.getInstance(application);
@@ -28,19 +28,28 @@ public class GpsRepository
 
 	public void insert(Gps gps)
 	{
-		new InsertNoteAsyncTask(gpsDao).execute(gps);
+		new InsertGpsAsyncTask(gpsDao).execute(gps);
+	}
+	public void update(Gps gps)
+	{
+		new UpdateGpsAsyncTask(gpsDao).execute(gps);
+	}
+
+	public void delete(Gps gps)
+	{
+		new DeleteGpsAsyncTask(gpsDao).execute(gps);
 	}
 
 	public void deleteAllGps()
 	{
-		new DeleteAllNotesAsyncTask(gpsDao).execute();
+		new DeleteAllGpsAsyncTask(gpsDao).execute();
 	}
 
-	private static class InsertNoteAsyncTask extends AsyncTask<Gps, Void, Void>
+	private static class InsertGpsAsyncTask extends AsyncTask<Gps, Void, Void>
 	{
 		private GpsDao gpsDao;
 
-		private InsertNoteAsyncTask(NoteDao noteDao)
+		private InsertGpsAsyncTask(GpsDao gpsDao)
 		{
 			this.gpsDao = gpsDao;
 		}
@@ -52,21 +61,52 @@ public class GpsRepository
 			return null;
 		}
 	}
-	*/
-
-	private static class DeleteAllNotesAsyncTask extends AsyncTask<Void, Void, Void>
+	private static class UpdateGpsAsyncTask extends AsyncTask<Gps, Void, Void>
 	{
-		private NoteDao noteDao;
+		private GpsDao gpsDao;
 
-		private DeleteAllNotesAsyncTask(NoteDao noteDao)
+		private UpdateGpsAsyncTask(GpsDao gpsDao)
 		{
-			this.noteDao = noteDao;
+			this.gpsDao = gpsDao;
+		}
+
+		@Override
+		protected Void doInBackground(Gps... gpss)
+		{
+			gpsDao.update(gpss[0]);
+			return null;
+		}
+	}
+	private static class DeleteGpsAsyncTask extends AsyncTask<Gps, Void, Void>
+	{
+		private GpsDao gpsDao;
+
+		private DeleteGpsAsyncTask(GpsDao gpsDao)
+		{
+			this.gpsDao = gpsDao;
+		}
+
+		@Override
+		protected Void doInBackground(Gps... gpss)
+		{
+			gpsDao.delete(gpss[0]);
+			return null;
+		}
+	}
+
+	private static class DeleteAllGpsAsyncTask extends AsyncTask<Void, Void, Void>
+	{
+		private GpsDao gpsDao;
+
+		private DeleteAllGpsAsyncTask(GpsDao gpsDao)
+		{
+			this.gpsDao = gpsDao;
 		}
 
 		@Override
 		protected Void doInBackground(Void... voids)
 		{
-			noteDao.deleteAllNotes();
+			gpsDao.deleteAllGps();
 			return null;
 		}
 	}

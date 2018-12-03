@@ -88,8 +88,10 @@ public class MainActivity extends AppCompatActivity
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
 
 			Note note = new Note(title, description, priority);
+			Gps gps=new Gps("522","6534");
+			noteViewModel.insert(gps);
 			noteViewModel.insert(note);
-
+			noteViewModel.getAllGps();
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else
 		{

@@ -18,6 +18,16 @@ public class Gps
 		this.szer = szer;
 	}
 
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	public int getId()
+	{
+		return id;
+	}
+
 	public String getWyso()
 	{
 		return wyso;
@@ -28,13 +38,5 @@ public class Gps
 		return szer;
 	}
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
 
-	public int getId()
-	{
-		return id;
-	}
 }
