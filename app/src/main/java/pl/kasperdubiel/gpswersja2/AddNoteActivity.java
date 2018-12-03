@@ -98,6 +98,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 	public void startService(View v)
 	{
+
 		String input = editTextInput.getText().toString();
 		if(input.matches(""))
 		{

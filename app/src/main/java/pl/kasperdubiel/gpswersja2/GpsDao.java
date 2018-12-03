@@ -8,7 +8,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
-
+import pl.kasperdubiel.gpswersja2.Gps;
 @Dao
 public interface GpsDao
 {
@@ -22,8 +22,8 @@ public interface GpsDao
 	void delete(Gps gps);
 
 	@Query("DELETE From gps_table")
-	void deleteAllNotes();
+	void deleteAllGps();
 
 	@Query("SELECT * FROM gps_table ORDER BY id DESC")
-	LiveData<List<Gps>> getAllNotes();
+	LiveData<List<Gps>> getAllGps();
 }
