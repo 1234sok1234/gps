@@ -28,6 +28,8 @@ public class BackgroudService extends Service
 	private LocationManager mLocationManager = null;
 	private int LOCATION_INTERVAL = 1000;
 	private static final float LOCATION_DISTANCE = 10f;
+	//private NoteViewModel noteViewModel;
+
 
 	private class LocationListener implements android.location.LocationListener
 	{
@@ -44,6 +46,9 @@ public class BackgroudService extends Service
 		public void onLocationChanged(Location location)
 		{
 			Log.e(TAG, "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
+			//Gps gps=new Gps(location.getLatitude(),location.getLongitude());
+			//noteViewModel.insert(gps);
+
 			mLastLocation.set(location);
 		}
 
@@ -123,6 +128,7 @@ public class BackgroudService extends Service
 	public void onDestroy()
 	{
 		Log.e(TAG, "onDestroy");
+		//noteViewModel.deleteAllGps();
 		super.onDestroy();
 		if (mLocationManager != null)
 		{

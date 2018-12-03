@@ -26,8 +26,5 @@ public interface GpsDao
 
 	@Query("SELECT * FROM gps_table ORDER BY id DESC")
 	LiveData<List<Gps>> getAllGps();
-	@Query("SELECT wyso From gps_table")
-	void wyso();
-	@Query("SELECT szer From gps_table")
-	void szer();
+
 }

@@ -9,10 +9,10 @@ public class Gps
 {
 	@PrimaryKey(autoGenerate = true)
 	private int id;
-	private String wyso;
-	private String szer;
+	private Double wyso;
+	private Double szer;
 
-	public Gps(String wyso, String szer)
+	public Gps(Double wyso, Double szer)
 	{
 		this.wyso = wyso;
 		this.szer = szer;
@@ -28,12 +28,12 @@ public class Gps
 		return id;
 	}
 
-	public String getWyso()
+	public Double getWyso()
 	{
 		return wyso;
 	}
 
-	public String getSzer()
+	public Double getSzer()
 	{
 		return szer;
 	}
