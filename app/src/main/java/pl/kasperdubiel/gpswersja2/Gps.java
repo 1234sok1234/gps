@@ -37,6 +37,6 @@ public class Gps
 	{
 		return szer;
 	}
-
+//komentarz
 
 }
