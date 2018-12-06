@@ -35,6 +35,7 @@ public class AddNoteActivity extends AppCompatActivity
 	public static final String EXTRA_DESCRIPTION = "pl.kasperdubiel.gpswersja2.EXTRA_DESCRIPTION";
 	public static final String EXTRA_PRIORITY = "pl.kasperdubiel.gpswersja2.EXTRA_PRIORITY";
 	public static final String EXTRA_PROTI = "pl.kasperdubiel.gpswersja2.EXTRA_PROTI";
+	public static final String EXTRA_PROTIX = "pl.kasperdubiel.gpswersja2.EXTRA_PROTIX";
 
 	private EditText editTextTitle;
 	private EditText editTextDescription;
@@ -123,6 +124,7 @@ public class AddNoteActivity extends AppCompatActivity
 		data.putExtra(EXTRA_DESCRIPTION, description);
 		data.putExtra(EXTRA_PRIORITY, priority);
 		data.putExtra(EXTRA_PROTI, x);
+		data.putExtra(EXTRA_PROTIX, y);
 
 
 

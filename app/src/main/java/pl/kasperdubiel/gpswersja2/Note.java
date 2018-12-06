@@ -11,14 +11,17 @@ public class Note
 	private String title;
 	private String description;
 	private double posi;
+	private double posix;
 	private int priority;
 
-	public Note(String title, String description, int priority, double posi)
+	public Note(String title, String description, int priority, double posi,double posix)
 	{
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
 		this.posi = posi;
+		this.posix = posix;
+
 	}
 
 	public void setId(int id)
@@ -50,5 +53,8 @@ public class Note
 	{
 		return posi;
 	}
-
+	public double getPosix()
+	{
+		return posix;
+	}
 }

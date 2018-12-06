@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Note.class, Gps.class}, version = 4)
+@Database(entities = {Note.class, Gps.class}, version = 5)
 public abstract class NoteDatabase extends RoomDatabase
 {
 	private static NoteDatabase instance;
@@ -50,19 +50,19 @@ public abstract class NoteDatabase extends RoomDatabase
 		@Override
 		protected Void doInBackground(Void... voids)
 		{
-			noteDao.insert(new Note("Title 1", "Description 1", 1,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 3", "Description 3", 3,5d));
-			noteDao.insert(new Note("Title 1", "Description 1", 1,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
-			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d,3d));
+
+
 
 			return null;
 		}

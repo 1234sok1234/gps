@@ -100,10 +100,11 @@ public class MainActivity extends AppCompatActivity
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
 			String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
 			double proti = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTI,1);
+			double protix = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTIX,1);
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
 		//	Gps gps = new Gps(55d, 43d);
 			//noteViewModel.insert(gps);
-			Note note = new Note(title, description, priority, proti);
+			Note note = new Note(title, description, priority, proti,protix);
 			noteViewModel.insert(note);
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else

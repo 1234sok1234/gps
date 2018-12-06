@@ -50,6 +50,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		holder.textViewDescription.setText(currentNote.getDescription());
 		holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
 		holder.textViewPosi.setText(String.valueOf(currentNote.getPosi()));
+		holder.textViewPosix.setText(String.valueOf(currentNote.getPosix()));
 	}
 
 
@@ -63,6 +64,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		private TextView textViewDescription;
 		private TextView textViewPriority;
 		private TextView textViewPosi;
+		private TextView textViewPosix;
 
 		public NoteHolder(View itemView)
 		{
@@ -71,6 +73,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 			textViewDescription = itemView.findViewById(R.id.text_view_description);
 			textViewPriority = itemView.findViewById(R.id.text_view_priority);
 			textViewPosi = itemView.findViewById(R.id.text_view_posi);
+			textViewPosix = itemView.findViewById(R.id.text_view_posix);
 
 		}
 	}

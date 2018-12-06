@@ -33,18 +33,28 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_title"
                 android:text="Description" />
+
             <TextView
                 android:id="@+id/text_view_yy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_title"
-                android:text="Description" />
+                android:text="Start" />
+
             <TextView
                 android:id="@+id/text_view_posi2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_title"
-                android:text="Description" />
+                android:text="End" />
+
+            <TextView
+                android:id="@+id/text_view_pax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_title"
+                android:text="Time" />
+
 
             <TextView
                 android:id="@+id/text_view_posi"
@@ -54,7 +64,14 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_toEndOf="@+id/text_view_description"
-                android:text="posi" />
+                android:text="szerokosc" />
+
+            <TextView
+                android:id="@+id/text_view_posix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_title"
+                android:text="wysok" />
 
             <TextView
                 android:id="@+id/text_view_priority"
