@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static pl.kasperdubiel.gpswersja2.App.CHANNEL_ID;
@@ -29,8 +30,10 @@ public class AddNoteActivity extends AppCompatActivity
 	private EditText editTextInput;
 	double szer = 0;
 	double wysok = 0;
-	double x,y;
+	double x, y;
 	int incr = 0;
+	private TextView text1;
+	private TextView text2;
 	public static final String EXTRA_TITLE = "pl.kasperdubiel.gpswersja2.EXTRA_TITLE";
 	public static final String EXTRA_DESCRIPTION = "pl.kasperdubiel.gpswersja2.EXTRA_DESCRIPTION";
 	public static final String EXTRA_PRIORITY = "pl.kasperdubiel.gpswersja2.EXTRA_PRIORITY";
@@ -48,7 +51,8 @@ public class AddNoteActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_note);
 		editTextInput = findViewById(R.id.edit_text_input);
-
+		text1 = findViewById(R.id.szerr);
+		text2 = findViewById(R.id.wysoo);
 		editTextTitle = findViewById(R.id.edit_text_title);
 		editTextDescription = findViewById(R.id.edit_text_description);
 
@@ -71,6 +75,8 @@ public class AddNoteActivity extends AppCompatActivity
 			Log.i("xddddd", bundle.getDouble("x") + " " + bundle.getDouble("y"));
 			szer = szer + bundle.getDouble("x");
 			wysok = wysok + bundle.getDouble("y");
+			text1.setText(Double.toString(bundle.getDouble("x")));
+			text2.setText(Double.toString(bundle.getDouble("y")));
 			incr++;
 			/*
 			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
@@ -125,7 +131,6 @@ public class AddNoteActivity extends AppCompatActivity
 		data.putExtra(EXTRA_PRIORITY, priority);
 		data.putExtra(EXTRA_PROTI, x);
 		data.putExtra(EXTRA_PROTIX, y);
-
 
 
 		setResult(RESULT_OK, data);
@@ -184,8 +189,8 @@ public class AddNoteActivity extends AppCompatActivity
 
 	public void stopService(View v)
 	{
-		x=szer/incr;
-		y=wysok/incr;
+		x = szer / incr;
+		y = wysok / incr;
 		Log.i("xddddd", "ooooooooooooooooooooooooooooooo");
 		Log.i("xddddd", Double.toString(x));
 		Log.i("xddddd", Double.toString(y));
