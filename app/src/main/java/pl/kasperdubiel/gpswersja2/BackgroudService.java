@@ -67,8 +67,8 @@ public class BackgroudService extends Service
 			second = cal.get(Calendar.SECOND);
 			millisecond = cal.get(Calendar.MILLISECOND);
 			Log.e(TAG, Long.toString(second) + " " + Long.toString(millisecond));
-			Log.e(TAG, Integer.toString(LOCATION_INTERVAL));
-			Log.e(TAG, "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
+			//Log.e(TAG, Integer.toString(LOCATION_INTERVAL));
+			//Log.e(TAG, "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
 			//Gps gps=new Gps(location.getLatitude(),location.getLongitude());
 			//noteViewModel.insert(gps);
 

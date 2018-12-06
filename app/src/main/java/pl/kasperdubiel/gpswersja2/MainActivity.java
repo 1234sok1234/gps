@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity
 	List<Note> x;
 	LiveData<List<Gps>> yy;
 	List<Gps> xx;
+	double szer=0;
+	double wysok=0;
 	public static final int ADD_NOTE_REQUEST = 1;
 
 
@@ -97,10 +99,11 @@ public class MainActivity extends AppCompatActivity
 		{
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
 			String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
+			double proti = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTI,1);
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
-			Gps gps = new Gps(55d, 43d);
-			noteViewModel.insert(gps);
-			Note note = new Note(title, description, priority, 10d);
+		//	Gps gps = new Gps(55d, 43d);
+			//noteViewModel.insert(gps);
+			Note note = new Note(title, description, priority, proti);
 			noteViewModel.insert(note);
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else
@@ -109,46 +112,8 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
-	private BroadcastReceiver br = new BroadcastReceiver()
-	{
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-			Bundle bundle = intent.getExtras();
-			/*
-			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
-			Log.i(TAG, "+++++++");
-			Log.i(TAG, bundle.getDouble("x") + " " + bundle.getDouble("y"));
-			noteViewModel1.insert(gps);
-			y=noteViewModel.getAllNotes();
-			x=y.getValue();
 
-			Log.e(TAG, "initxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr");
-			Log.e(TAG,Double.toString(x.get(0).getPosi()));
-			yy=noteViewModel1.getAllGps();
-			xx=yy.getValue();
 
-			Log.e(TAG, "initxxxxxxxxxxxxccccccccccccccccccccccccccxxxxxxxxxxxxxxxxxr");
-			Log.e(TAG,Double.toString(xx.get(0).getSzer()));
-			*/
-		}
-	};
-
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		registerReceiver(br, new IntentFilter("1"));
-
-	}
-
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		unregisterReceiver(br);
-
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

@@ -2,8 +2,10 @@ package pl.kasperdubiel.gpswersja2;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.provider.ContactsContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -25,13 +27,18 @@ public class AddNoteActivity extends AppCompatActivity
 {
 	private Notification notification;
 	private EditText editTextInput;
-
+	double szer = 0;
+	double wysok = 0;
+	double x,y;
+	int incr = 0;
 	public static final String EXTRA_TITLE = "pl.kasperdubiel.gpswersja2.EXTRA_TITLE";
 	public static final String EXTRA_DESCRIPTION = "pl.kasperdubiel.gpswersja2.EXTRA_DESCRIPTION";
 	public static final String EXTRA_PRIORITY = "pl.kasperdubiel.gpswersja2.EXTRA_PRIORITY";
+	public static final String EXTRA_PROTI = "pl.kasperdubiel.gpswersja2.EXTRA_PROTI";
 
 	private EditText editTextTitle;
 	private EditText editTextDescription;
+
 	private NumberPicker numberPickerPriority;
 
 	@Override
@@ -43,6 +50,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 		editTextTitle = findViewById(R.id.edit_text_title);
 		editTextDescription = findViewById(R.id.edit_text_description);
+
 		numberPickerPriority = findViewById(R.id.number_picker_priority);
 		numberPickerPriority.setMinValue(1);
 		numberPickerPriority.setMaxValue(10);
@@ -51,6 +59,50 @@ public class AddNoteActivity extends AppCompatActivity
 			getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 		}
 		setTitle("New workout");
+	}
+
+	private BroadcastReceiver br = new BroadcastReceiver()
+	{
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+			Bundle bundle = intent.getExtras();
+			Log.i("xddddd", bundle.getDouble("x") + " " + bundle.getDouble("y"));
+			szer = szer + bundle.getDouble("x");
+			wysok = wysok + bundle.getDouble("y");
+			incr++;
+			/*
+			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
+			Log.i(TAG, "+++++++");
+			noteViewModel1.insert(gps);
+			y=noteViewModel.getAllNotes();
+			x=y.getValue();
+
+			Log.e(TAG, "initxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr");
+			Log.e(TAG,Double.toString(x.get(0).getPosi()));
+			yy=noteViewModel1.getAllGps();
+			xx=yy.getValue();
+
+			Log.e(TAG, "initxxxxxxxxxxxxccccccccccccccccccccccccccxxxxxxxxxxxxxxxxxr");
+			Log.e(TAG,Double.toString(xx.get(0).getSzer()));
+			*/
+		}
+	};
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		registerReceiver(br, new IntentFilter("1"));
+
+	}
+
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		unregisterReceiver(br);
+
 	}
 
 	private void saveNote()
@@ -70,6 +122,9 @@ public class AddNoteActivity extends AppCompatActivity
 		data.putExtra(EXTRA_TITLE, title);
 		data.putExtra(EXTRA_DESCRIPTION, description);
 		data.putExtra(EXTRA_PRIORITY, priority);
+		data.putExtra(EXTRA_PROTI, x);
+
+
 
 		setResult(RESULT_OK, data);
 
@@ -101,9 +156,9 @@ public class AddNoteActivity extends AppCompatActivity
 	{
 
 		String input = editTextInput.getText().toString();
-		if(input.matches(""))
+		if (input.matches(""))
 		{
-			input="1000";
+			input = "1000";
 		}
 
 		Intent serviceIntent = new Intent(this, BackgroudService.class);
@@ -127,6 +182,11 @@ public class AddNoteActivity extends AppCompatActivity
 
 	public void stopService(View v)
 	{
+		x=szer/incr;
+		y=wysok/incr;
+		Log.i("xddddd", "ooooooooooooooooooooooooooooooo");
+		Log.i("xddddd", Double.toString(x));
+		Log.i("xddddd", Double.toString(y));
 		Intent serviceIntent = new Intent(this, BackgroudService.class);
 		stopService(serviceIntent);
 	}
