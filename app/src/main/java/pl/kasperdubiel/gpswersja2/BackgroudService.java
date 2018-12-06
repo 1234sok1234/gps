@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,6 +20,11 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
+
+import static android.app.Activity.RESULT_OK;
 import static android.support.constraint.Constraints.TAG;
 import static pl.kasperdubiel.gpswersja2.App.CHANNEL_ID;
 
@@ -28,11 +34,19 @@ public class BackgroudService extends Service
 	private LocationManager mLocationManager = null;
 	private int LOCATION_INTERVAL = 1000;
 	private static final float LOCATION_DISTANCE = 10f;
+	Calendar cal = Calendar.getInstance();
+	int millisecond;
+	int second;
+	double roznica, x1, x2;
+	Gps gps;
+
+
 	//private NoteViewModel noteViewModel;
 
 
 	private class LocationListener implements android.location.LocationListener
 	{
+
 
 		Location mLastLocation;
 
@@ -45,6 +59,15 @@ public class BackgroudService extends Service
 		@Override
 		public void onLocationChanged(Location location)
 		{
+			Intent intent  = new Intent("1");
+			intent.putExtra("x",location.getLatitude());
+			intent.putExtra("y",location.getLongitude());
+			sendBroadcast(intent);
+			cal = Calendar.getInstance();
+			second = cal.get(Calendar.SECOND);
+			millisecond = cal.get(Calendar.MILLISECOND);
+			Log.e(TAG, Long.toString(second) + " " + Long.toString(millisecond));
+			Log.e(TAG, Integer.toString(LOCATION_INTERVAL));
 			Log.e(TAG, "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
 			//Gps gps=new Gps(location.getLatitude(),location.getLongitude());
 			//noteViewModel.insert(gps);
@@ -160,6 +183,7 @@ public class BackgroudService extends Service
 			mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 		}
 	}
+
 	public void poczatek()
 	{
 

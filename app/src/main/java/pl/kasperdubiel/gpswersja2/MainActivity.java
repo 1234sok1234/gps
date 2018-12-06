@@ -2,7 +2,10 @@ package pl.kasperdubiel.gpswersja2;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +26,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
+	private BroadcastReceiver br=new BroadcastReceiver()
+	{
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+			Bundle bundle = intent.getExtras();
+			Gps gps=new Gps(bundle.getDouble("x"),bundle.getDouble("y"));
+			noteViewModel.insert(gps);
+		}
+	};
 	public static final int ADD_NOTE_REQUEST = 1;
 
 	private NoteViewModel noteViewModel;
@@ -88,15 +101,28 @@ public class MainActivity extends AppCompatActivity
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
 
 			Note note = new Note(title, description, priority);
-			Gps gps=new Gps(522d,6534d);
-			noteViewModel.insert(gps);
 			noteViewModel.insert(note);
-			noteViewModel.getAllGps();
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else
 		{
 			Toast.makeText(this, "Workout did not start", Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		registerReceiver(br, new IntentFilter("1"));
+
+	}
+
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		unregisterReceiver(br);
+
 	}
 
 	@Override
