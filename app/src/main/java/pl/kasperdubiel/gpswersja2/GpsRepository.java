@@ -45,6 +45,10 @@ public class GpsRepository
 	{
 		new DeleteAllGpsAsyncTask(gpsDao).execute();
 	}
+	public LiveData<List<Gps>> getAllGps()
+	{
+		return allGps;
+	}
 
 	private static class InsertGpsAsyncTask extends AsyncTask<Gps, Void, Void>
 	{
