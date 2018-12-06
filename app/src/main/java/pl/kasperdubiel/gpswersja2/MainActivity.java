@@ -1,5 +1,6 @@
 package pl.kasperdubiel.gpswersja2;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModelProviders;
@@ -30,7 +31,10 @@ public class MainActivity extends AppCompatActivity
 {
 	private static final String TAG = "BOOMBOOMTESTGPS";
 	private NoteViewModel noteViewModel,noteViewModel1;
-	List<Gps> x;
+	LiveData<List<Note>> y;
+	List<Note> x;
+	LiveData<List<Gps>> yy;
+	List<Gps> xx;
 	public static final int ADD_NOTE_REQUEST = 1;
 
 
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setAdapter(adapter);
 
 		noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+		noteViewModel1=ViewModelProviders.of(this).get(NoteViewModel.class);
 		noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>()
 		{
 			@Override
@@ -87,7 +92,16 @@ public class MainActivity extends AppCompatActivity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-		//x=noteViewModel.getAllGps().getValue();
+		y=noteViewModel.getAllNotes();
+		x=y.getValue();
+
+		Log.e(TAG, "initxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr");
+		Log.e(TAG,Double.toString(x.get(0).getPosi()));
+		yy=noteViewModel1.getAllGps();
+		xx=yy.getValue();
+
+		Log.e(TAG, "initxxxxxxxxxxxxccccccccccccccccccccccccccxxxxxxxxxxxxxxxxxr");
+		Log.e(TAG,Double.toString(xx.get(0).getSzer()));
 		//x.get(0).getWyso();
 		if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK)
 		{
