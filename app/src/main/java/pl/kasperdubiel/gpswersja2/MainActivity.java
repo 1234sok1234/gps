@@ -61,13 +61,13 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setAdapter(adapter);
 
 		noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
-		noteViewModel1=ViewModelProviders.of(this).get(NoteViewModel.class);
 		noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>()
 		{
 			@Override
 			public void onChanged(@Nullable List<Note> notes)
 			{    //update Recyccleview
 				adapter.submitList(notes);
+				//noteViewModel.getAllGps().observe(this,adapter.submitList(gps));
 				//Toast.makeText(MainActivity.this, "onchangerd", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -92,23 +92,14 @@ public class MainActivity extends AppCompatActivity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-		y=noteViewModel.getAllNotes();
-		x=y.getValue();
-
-		Log.e(TAG, "initxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr");
-		Log.e(TAG,Double.toString(x.get(0).getPosi()));
-		yy=noteViewModel1.getAllGps();
-		xx=yy.getValue();
-
-		Log.e(TAG, "initxxxxxxxxxxxxccccccccccccccccccccccccccxxxxxxxxxxxxxxxxxr");
-		Log.e(TAG,Double.toString(xx.get(0).getSzer()));
 		//x.get(0).getWyso();
 		if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK)
 		{
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
 			String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
-
+			Gps gps = new Gps(55d, 43d);
+			noteViewModel.insert(gps);
 			Note note = new Note(title, description, priority, 10d);
 			noteViewModel.insert(note);
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
@@ -124,10 +115,22 @@ public class MainActivity extends AppCompatActivity
 		public void onReceive(Context context, Intent intent)
 		{
 			Bundle bundle = intent.getExtras();
+			/*
 			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
 			Log.i(TAG, "+++++++");
 			Log.i(TAG, bundle.getDouble("x") + " " + bundle.getDouble("y"));
-			noteViewModel.insert(gps);
+			noteViewModel1.insert(gps);
+			y=noteViewModel.getAllNotes();
+			x=y.getValue();
+
+			Log.e(TAG, "initxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr");
+			Log.e(TAG,Double.toString(x.get(0).getPosi()));
+			yy=noteViewModel1.getAllGps();
+			xx=yy.getValue();
+
+			Log.e(TAG, "initxxxxxxxxxxxxccccccccccccccccccccccccccxxxxxxxxxxxxxxxxxr");
+			Log.e(TAG,Double.toString(xx.get(0).getSzer()));
+			*/
 		}
 	};
 
