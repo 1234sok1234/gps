@@ -1,6 +1,7 @@
 package pl.kasperdubiel.gpswersja2;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,7 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
 {
 	private static final String TAG = "BOOMBOOMTESTGPS";
-	private NoteViewModel noteViewModel;
+	private NoteViewModel noteViewModel,noteViewModel1;
 	List<Gps> x;
 	public static final int ADD_NOTE_REQUEST = 1;
 
@@ -86,9 +87,8 @@ public class MainActivity extends AppCompatActivity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-		x = noteViewModel.getAllGps().getValue();
-		Log.i(TAG, "((((((((((((");
-		Log.i(TAG, Double.toString(x.get(0).getSzer()));
+		//x=noteViewModel.getAllGps().getValue();
+		//x.get(0).getWyso();
 		if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK)
 		{
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
