@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,7 +44,6 @@ public class AddNoteActivity extends AppCompatActivity
 		editTextTitle = findViewById(R.id.edit_text_title);
 		editTextDescription = findViewById(R.id.edit_text_description);
 		numberPickerPriority = findViewById(R.id.number_picker_priority);
-
 		numberPickerPriority.setMinValue(1);
 		numberPickerPriority.setMaxValue(10);
 		if (getSupportActionBar() != null)
@@ -111,6 +111,7 @@ public class AddNoteActivity extends AppCompatActivity
 		serviceIntent.putExtra("inputExtra2", "5000");
 
 		ContextCompat.startForegroundService(this, serviceIntent);
+
 	}
 
 	public void set()

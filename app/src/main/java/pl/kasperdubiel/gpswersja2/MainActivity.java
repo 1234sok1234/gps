@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,19 +27,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-	private BroadcastReceiver br=new BroadcastReceiver()
-	{
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-			Bundle bundle = intent.getExtras();
-			Gps gps=new Gps(bundle.getDouble("x"),bundle.getDouble("y"));
-			noteViewModel.insert(gps);
-		}
-	};
+	private static final String TAG = "BOOMBOOMTESTGPS";
+	private NoteViewModel noteViewModel;
+	List<Gps> x;
 	public static final int ADD_NOTE_REQUEST = 1;
 
-	private NoteViewModel noteViewModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -93,14 +86,16 @@ public class MainActivity extends AppCompatActivity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-
+		x = noteViewModel.getAllGps().getValue();
+		Log.i(TAG, "((((((((((((");
+		Log.i(TAG, Double.toString(x.get(0).getSzer()));
 		if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK)
 		{
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
 			String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
 
-			Note note = new Note(title, description, priority);
+			Note note = new Note(title, description, priority, 10d);
 			noteViewModel.insert(note);
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else
@@ -108,6 +103,19 @@ public class MainActivity extends AppCompatActivity
 			Toast.makeText(this, "Workout did not start", Toast.LENGTH_SHORT).show();
 		}
 	}
+
+	private BroadcastReceiver br = new BroadcastReceiver()
+	{
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+			Bundle bundle = intent.getExtras();
+			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
+			Log.i(TAG, "+++++++");
+			Log.i(TAG, bundle.getDouble("x") + " " + bundle.getDouble("y"));
+			noteViewModel.insert(gps);
+		}
+	};
 
 	@Override
 	protected void onResume()
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity
 		{
 			case R.id.delete_all_notes:
 				noteViewModel.deleteAllNotes();
+				noteViewModel.deleteAllGps();
 				Toast.makeText(this, "All workouts deleted", Toast.LENGTH_SHORT).show();
 				return true;
 			default:

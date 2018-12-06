@@ -8,7 +8,9 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+
 import pl.kasperdubiel.gpswersja2.Gps;
+
 @Dao
 public interface GpsDao
 {
@@ -26,5 +28,4 @@ public interface GpsDao
 
 	@Query("SELECT * FROM gps_table ORDER BY id DESC")
 	LiveData<List<Gps>> getAllGps();
-
 }

@@ -151,7 +151,6 @@ public class BackgroudService extends Service
 	public void onDestroy()
 	{
 		Log.e(TAG, "onDestroy");
-		//noteViewModel.deleteAllGps();
 		super.onDestroy();
 		if (mLocationManager != null)
 		{

@@ -1,5 +1,6 @@
 package pl.kasperdubiel.gpswersja2;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -8,6 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Gps
 {
 	@PrimaryKey(autoGenerate = true)
+	@ColumnInfo(name = "id")
 	private int id;
 	private Double wyso;
 	private Double szer;

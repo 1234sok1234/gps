@@ -30,6 +30,7 @@ public class GpsRepository
 	{
 		new InsertGpsAsyncTask(gpsDao).execute(gps);
 	}
+
 	public void update(Gps gps)
 	{
 		new UpdateGpsAsyncTask(gpsDao).execute(gps);
@@ -61,6 +62,7 @@ public class GpsRepository
 			return null;
 		}
 	}
+
 	private static class UpdateGpsAsyncTask extends AsyncTask<Gps, Void, Void>
 	{
 		private GpsDao gpsDao;
@@ -77,6 +79,7 @@ public class GpsRepository
 			return null;
 		}
 	}
+
 	private static class DeleteGpsAsyncTask extends AsyncTask<Gps, Void, Void>
 	{
 		private GpsDao gpsDao;
@@ -110,5 +113,4 @@ public class GpsRepository
 			return null;
 		}
 	}
-
 }

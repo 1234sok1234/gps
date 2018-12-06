@@ -23,7 +23,7 @@ public class NoteViewModel extends AndroidViewModel
 		repository = new NoteRepository(application);
 		repository1 = new GpsRepository(application);
 		allNotes = repository.getAllNotes();
-		//allGps = repository1.getAllGps();
+		allGps = repository1.getAllGps();
 	}
 
 	public void insert(Note note)
@@ -64,15 +64,15 @@ public class NoteViewModel extends AndroidViewModel
 	{
 		repository1.deleteAllGps();
 	}
+	public LiveData<List<Gps>> getAllGps()
+	{
+		return allGps;
+	}
 
 	public LiveData<List<Note>> getAllNotes()
 	{
 		return allNotes;
 	}
 
-	public LiveData<List<Gps>> getAllGps()
-	{
-		return allGps;
-	}
 
 }

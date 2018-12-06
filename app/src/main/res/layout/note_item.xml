@@ -37,6 +37,16 @@
             android:layout_below="@id/text_view_title"
             android:text="Description" />
 
+        <TextView
+            android:id="@+id/text_view_posi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_title"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/text_view_description"
+            android:text="posi" />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

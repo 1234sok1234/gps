@@ -10,13 +10,15 @@ public class Note
 	private int id;
 	private String title;
 	private String description;
+	private double posi;
 	private int priority;
 
-	public Note(String title, String description, int priority)
+	public Note(String title, String description, int priority, double posi)
 	{
 		this.title = title;
 		this.description = description;
 		this.priority = priority;
+		this.posi = posi;
 	}
 
 	public void setId(int id)
@@ -43,4 +45,10 @@ public class Note
 	{
 		return priority;
 	}
+
+	public double getPosi()
+	{
+		return posi;
+	}
+
 }

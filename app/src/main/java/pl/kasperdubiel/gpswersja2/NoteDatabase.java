@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Note.class, Gps.class}, version = 3)
+@Database(entities = {Note.class, Gps.class}, version = 4)
 public abstract class NoteDatabase extends RoomDatabase
 {
 	private static NoteDatabase instance;
@@ -50,19 +50,20 @@ public abstract class NoteDatabase extends RoomDatabase
 		@Override
 		protected Void doInBackground(Void... voids)
 		{
-			gpsDao.insert(new Gps(522d, 523d));
-			noteDao.insert(new Note("Title 1", "Description 1", 1));
-			noteDao.insert(new Note("Title 2", "Description 2", 2));
-			noteDao.insert(new Note("Title 3", "Description 3", 3));
-			noteDao.insert(new Note("Title 1", "Description 1", 1));
-			noteDao.insert(new Note("Title 2", "Description 2", 2));
-			noteDao.insert(new Note("Title 3", "Description 3", 3));
-			noteDao.insert(new Note("Title 1", "Description 1", 1));
-			noteDao.insert(new Note("Title 2", "Description 2", 2));
-			noteDao.insert(new Note("Title 3", "Description 3", 3));
-			noteDao.insert(new Note("Title 1", "Description 1", 1));
-			noteDao.insert(new Note("Title 2", "Description 2", 2));
-			noteDao.insert(new Note("Title 3", "Description 3", 3));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 3", "Description 3", 3,5d));
+			noteDao.insert(new Note("Title 1", "Description 1", 1,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+			noteDao.insert(new Note("Title 2", "Description 2", 2,5d));
+
 			return null;
 		}
 	}
