@@ -16,6 +16,7 @@ import java.util.List;
 
 public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 {
+
 	public NoteAdapter()
 	{
 		super(DIFF_CALLBACK);
@@ -47,7 +48,6 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 
 	@Override
 	public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
-
 		Calendar time1, time2;
 		long time1x, time2x;
 		time1=Calendar.getInstance();
@@ -57,11 +57,22 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		time2x=currentNote.getTime2();
 		time1.setTimeInMillis(time1x);
 		time2.setTimeInMillis(time2x);
+		long diff=time2x-time1x;
+		long diffSeconds = diff / 1000;
+
+		// Calculate difference in minutes
+		long diffMinutes = diff / (60 * 1000);
+
+		// Calculate difference in hours
+		long diffHours = diff / (60 * 60 * 1000);
+
+		// Calculate difference in days
+		long diffDays = diff / (24 * 60 * 60 * 1000);
 		holder.textViewTitle.setText(currentNote.getTitle());
 		holder.textViewDescription.setText(currentNote.getDescription());
 		holder.textViewPriority.setText("Priority: "+String.valueOf(currentNote.getPriority()));
-		holder.textViewPosi.setText("Lat: "+String.valueOf(currentNote.getPosi()));
-		holder.textViewPosix.setText("Long: "+String.valueOf(currentNote.getPosix()));
+		holder.textViewPosi.setText("Distance: "+String.valueOf(currentNote.getPosi())+"m");
+		holder.textViewPosix.setText("Time: "+diffDays+"days,"+diffHours+"hours,"+diffMinutes+"minutes,"+diffSeconds+"seconds");
 		SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm:s a");
 		holder.textViewyy.setText("Started at: "+format.format(time1.getTime()));
 		holder.textViewPosi2.setText("Stopped at: "+format.format(time2.getTime()));

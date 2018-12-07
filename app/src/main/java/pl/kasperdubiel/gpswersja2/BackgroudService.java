@@ -67,6 +67,8 @@ int ilo=0;
 			Intent intent  = new Intent("1");
 			intent.putExtra("x",location.getLatitude());
 			intent.putExtra("y",location.getLongitude());
+			x1=location.getLatitude();
+			x2=location.getLongitude();
 			intent.putExtra("z",time1x);
 			intent.putExtra("a",time2x);
 			intent.putExtra("ilo",ilo);
@@ -167,6 +169,26 @@ int ilo=0;
 	{
 		time2 = Calendar.getInstance();
 		time2x=time2.getTimeInMillis();
+
+
+
+		Intent intent  = new Intent("1");
+		intent.putExtra("x",x1);
+		intent.putExtra("y",x2);
+		intent.putExtra("z",time1x);
+		intent.putExtra("a",time2x);
+		boolean a=true;
+		intent.putExtra("stop",a);
+
+		Log.e(TAG, " ssssssssssssssswyslano??===============sssss");
+		sendBroadcast(intent);
+
+
+
+
+
+
+
 		Log.e(TAG, "onDestroy");
 		super.onDestroy();
 		if (mLocationManager != null)
