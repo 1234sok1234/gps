@@ -20,6 +20,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
@@ -35,6 +36,9 @@ public class BackgroudService extends Service
 	private int LOCATION_INTERVAL = 1000;
 	private static final float LOCATION_DISTANCE = 10f;
 	Calendar cal = Calendar.getInstance();
+	Calendar time1,time2;
+	long time1x,time2x;
+int ilo=0;
 	int millisecond;
 	int second;
 	double roznica, x1, x2;
@@ -59,9 +63,18 @@ public class BackgroudService extends Service
 		@Override
 		public void onLocationChanged(Location location)
 		{
+			ilo++;
 			Intent intent  = new Intent("1");
 			intent.putExtra("x",location.getLatitude());
 			intent.putExtra("y",location.getLongitude());
+			intent.putExtra("z",time1x);
+			intent.putExtra("a",time2x);
+			intent.putExtra("ilo",ilo);
+			//float[] res=new float[2];
+			//location.distanceBetween(50.3338376,19.1128589,50.28033551941361,18.683018812109367,res);
+			Log.e(TAG, " sssssssssssssssssssssssssssss");
+			//Log.e(TAG, Float.toString(res[0])+" "+Float.toString(res[1]));
+			Log.e(TAG, " sssssssssssssssssssssssssssss");
 			sendBroadcast(intent);
 			cal = Calendar.getInstance();
 			second = cal.get(Calendar.SECOND);
@@ -131,6 +144,8 @@ public class BackgroudService extends Service
 		{
 			Log.d(TAG, "gps provider does not exist " + ex.getMessage());
 		}
+		time1 = Calendar.getInstance();
+		time1x=time1.getTimeInMillis();
 		String input = intent.getStringExtra("inputExtra");
 		Intent notificationIntent = new Intent(this, MainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -150,6 +165,8 @@ public class BackgroudService extends Service
 	@Override
 	public void onDestroy()
 	{
+		time2 = Calendar.getInstance();
+		time2x=time2.getTimeInMillis();
 		Log.e(TAG, "onDestroy");
 		super.onDestroy();
 		if (mLocationManager != null)

@@ -25,18 +25,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
 	private static final String TAG = "BOOMBOOMTESTGPS";
-	private NoteViewModel noteViewModel,noteViewModel1;
+	private NoteViewModel noteViewModel;
 	LiveData<List<Note>> y;
 	List<Note> x;
 	LiveData<List<Gps>> yy;
 	List<Gps> xx;
-	double szer=0;
-	double wysok=0;
+	double szer = 0;
+	double wysok = 0;
+	Calendar time1, time2;
+	long time1x, time2x;
 	public static final int ADD_NOTE_REQUEST = 1;
 
 
@@ -99,12 +102,25 @@ public class MainActivity extends AppCompatActivity
 		{
 			String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
 			String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
-			double proti = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTI,1);
-			double protix = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTIX,1);
+			double proti = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTI, 1);
+			double protix = data.getDoubleExtra(AddNoteActivity.EXTRA_PROTIX, 1);
 			int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
-		//	Gps gps = new Gps(55d, 43d);
+			String czesto = data.getStringExtra(AddNoteActivity.EXTRA_INPUT);
+			int ilo = data.getIntExtra(AddNoteActivity.EXTRA_ILO, 1);
+			time1x = data.getLongExtra(AddNoteActivity.EXTRA_TIME1X, 1);
+			Log.e(TAG, Long.toString(time1x));
+			Log.e(TAG, "zzzzzzzzzzzzzzzzzzzzzzzzz");
+			time2x = data.getLongExtra(AddNoteActivity.EXTRA_TIME2X, 1);
+			Log.e(TAG, Long.toString(time2x));
+			time1 = Calendar.getInstance();
+			time1.setTimeInMillis(time1x);
+			int second = time1.get(Calendar.SECOND);
+			int millisecond = time1.get(Calendar.MILLISECOND);
+			Log.e(TAG, Long.toString(second) + " " + Long.toString(millisecond));
+			//time2.setTimeInMillis(time2x);
+			//	Gps gps = new Gps(55d, 43d);
 			//noteViewModel.insert(gps);
-			Note note = new Note(title, description, priority, proti,protix);
+			Note note = new Note(title, description, priority, proti, protix, czesto, time1x, time2x, ilo);
 			noteViewModel.insert(note);
 			Toast.makeText(this, "Workout just started", Toast.LENGTH_SHORT).show();
 		} else
@@ -112,8 +128,6 @@ public class MainActivity extends AppCompatActivity
 			Toast.makeText(this, "Workout did not start", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-
 
 
 	@Override

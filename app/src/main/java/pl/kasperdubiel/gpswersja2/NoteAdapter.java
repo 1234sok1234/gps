@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
@@ -45,15 +47,36 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 
 	@Override
 	public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
+
+		Calendar time1, time2;
+		long time1x, time2x;
+		time1=Calendar.getInstance();
+		time2=Calendar.getInstance();
 		Note currentNote = getItem(position);
+		time1x=currentNote.getTime1();
+		time2x=currentNote.getTime2();
+		time1.setTimeInMillis(time1x);
+		time2.setTimeInMillis(time2x);
 		holder.textViewTitle.setText(currentNote.getTitle());
 		holder.textViewDescription.setText(currentNote.getDescription());
-		holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
-		holder.textViewPosi.setText(String.valueOf(currentNote.getPosi()));
-		holder.textViewPosix.setText(String.valueOf(currentNote.getPosix()));
+		holder.textViewPriority.setText("Priority: "+String.valueOf(currentNote.getPriority()));
+		holder.textViewPosi.setText("Lat: "+String.valueOf(currentNote.getPosi()));
+		holder.textViewPosix.setText("Long: "+String.valueOf(currentNote.getPosix()));
+		SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm:s a");
+		holder.textViewyy.setText("Started at: "+format.format(time1.getTime()));
+		holder.textViewPosi2.setText("Stopped at: "+format.format(time2.getTime()));
+		holder.textViewPax.setText("Interval: "+String.valueOf(currentNote.getCzestotli())+" ms");
 	}
 
+/*
 
+						time1.get(Calendar.DAY_OF_MONTH)+"/"+
+						time1.get(Calendar.MONTH)+"/"+
+						time1.get(Calendar.YEAR)+"  "+
+						time1.get(Calendar.HOUR_OF_DAY)+":"+
+						time1.get(Calendar.MINUTE)+","+
+						time1.get(Calendar.SECOND)
+ */
 	public Note getNoteAt(int positon)
 	{
 		return getItem(positon);
@@ -65,6 +88,9 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		private TextView textViewPriority;
 		private TextView textViewPosi;
 		private TextView textViewPosix;
+		private TextView textViewPosi2;
+		private TextView textViewyy;
+		private TextView textViewPax;
 
 		public NoteHolder(View itemView)
 		{
@@ -74,6 +100,9 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 			textViewPriority = itemView.findViewById(R.id.text_view_priority);
 			textViewPosi = itemView.findViewById(R.id.text_view_posi);
 			textViewPosix = itemView.findViewById(R.id.text_view_posix);
+			textViewyy=itemView.findViewById(R.id.text_view_yy);
+			textViewPosi2=itemView.findViewById(R.id.text_view_posi2);
+			textViewPax=itemView.findViewById(R.id.text_view_pax);
 
 		}
 	}

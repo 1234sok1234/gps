@@ -22,6 +22,8 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import static pl.kasperdubiel.gpswersja2.App.CHANNEL_ID;
 
 public class AddNoteActivity extends AppCompatActivity
@@ -31,14 +33,24 @@ public class AddNoteActivity extends AppCompatActivity
 	double szer = 0;
 	double wysok = 0;
 	double x, y;
+	int ilo=0;
 	int incr = 0;
 	private TextView text1;
+	long time1x,time2x;
+	String input;
+
+
 	private TextView text2;
 	public static final String EXTRA_TITLE = "pl.kasperdubiel.gpswersja2.EXTRA_TITLE";
 	public static final String EXTRA_DESCRIPTION = "pl.kasperdubiel.gpswersja2.EXTRA_DESCRIPTION";
 	public static final String EXTRA_PRIORITY = "pl.kasperdubiel.gpswersja2.EXTRA_PRIORITY";
 	public static final String EXTRA_PROTI = "pl.kasperdubiel.gpswersja2.EXTRA_PROTI";
 	public static final String EXTRA_PROTIX = "pl.kasperdubiel.gpswersja2.EXTRA_PROTIX";
+	public static final String EXTRA_TIME1X = "pl.kasperdubiel.gpswersja2.EXTRA_TIME1X";
+	public static final String EXTRA_TIME2X = "pl.kasperdubiel.gpswersja2.EXTRA_TIME2X";
+	public static final String EXTRA_INPUT = "pl.kasperdubiel.gpswersja2.EXTRA_INPUT";
+	public static final String EXTRA_ILO = "pl.kasperdubiel.gpswersja2.EXTRA_ILO";
+
 
 	private EditText editTextTitle;
 	private EditText editTextDescription;
@@ -75,8 +87,13 @@ public class AddNoteActivity extends AppCompatActivity
 			Log.i("xddddd", bundle.getDouble("x") + " " + bundle.getDouble("y"));
 			szer = szer + bundle.getDouble("x");
 			wysok = wysok + bundle.getDouble("y");
+			Log.i("xddddd", "xxxxxxxxxxxxxxxdddddddddd");
 			text1.setText(Double.toString(bundle.getDouble("x")));
 			text2.setText(Double.toString(bundle.getDouble("y")));
+			ilo=bundle.getInt("ilo");
+			time1x=bundle.getLong("z");
+			time2x=bundle.getLong("a");
+
 			incr++;
 			/*
 			Gps gps = new Gps(bundle.getDouble("x"), bundle.getDouble("y"));
@@ -131,6 +148,10 @@ public class AddNoteActivity extends AppCompatActivity
 		data.putExtra(EXTRA_PRIORITY, priority);
 		data.putExtra(EXTRA_PROTI, x);
 		data.putExtra(EXTRA_PROTIX, y);
+		data.putExtra(EXTRA_TIME1X, time1x);
+		data.putExtra(EXTRA_TIME2X, time2x);
+		data.putExtra(EXTRA_ILO, ilo);
+		data.putExtra(EXTRA_INPUT, input);
 
 
 		setResult(RESULT_OK, data);
@@ -162,7 +183,7 @@ public class AddNoteActivity extends AppCompatActivity
 	public void startService(View v)
 	{
 
-		String input = editTextInput.getText().toString();
+		input = editTextInput.getText().toString();
 		if (input.matches(""))
 		{
 			input = "1000";
