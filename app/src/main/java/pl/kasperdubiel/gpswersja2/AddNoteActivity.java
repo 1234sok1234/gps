@@ -118,6 +118,7 @@ public class AddNoteActivity extends AppCompatActivity
 			ilo = bundle.getInt("ilo");
 			time1x = bundle.getLong("z");
 			time2x = bundle.getLong("a");
+			NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(123d,123d,123d));
 			double czas=timexxx-time1x;
 			if (czas!=0)
 			{

@@ -21,7 +21,7 @@ public abstract class NoteDatabase extends RoomDatabase
 	{
 		if (instance == null)
 		{
-			instance = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "note_database").fallbackToDestructiveMigration().addCallback(roomCallback).build();
+			instance = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "note_database").fallbackToDestructiveMigration().addCallback(roomCallback).allowMainThreadQueries().build();
 		}
 		return instance;
 	}

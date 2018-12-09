@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModelProviders;
+import android.arch.persistence.room.Database;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -112,6 +113,10 @@ public class MainActivity extends AppCompatActivity
 			int ilo = data.getIntExtra(AddNoteActivity.EXTRA_ILO, 1);
 			time1x = data.getLongExtra(AddNoteActivity.EXTRA_TIME1X, 1);
 			Log.e(TAG, Long.toString(time1x));
+			List<Gps> jnasd=NoteDatabase.getInstance(this).gpsDao().getAllGps();
+			NoteDatabase.getInstance(this).gpsDao().deleteAllGps();
+			Log.e(TAG, "zzzzzzzzzzzzzzzzzzzzzzzzz");
+			Log.e(TAG, "");
 			Log.e(TAG, "zzzzzzzzzzzzzzzzzzzzzzzzz");
 			time2x = data.getLongExtra(AddNoteActivity.EXTRA_TIME2X, 1);
 			Log.e(TAG, Long.toString(time2x));
