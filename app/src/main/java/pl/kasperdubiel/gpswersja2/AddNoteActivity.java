@@ -39,7 +39,7 @@ public class AddNoteActivity extends AppCompatActivity
 	int ilo = 0;
 	int incr = 0;
 	private TextView text1;
-	long time1x, time2x;
+	long time1x, time2x,timexxx;
 	String input;
 	double xl = 0, yl = 0;
 	double xn = 0, yn = 0;
@@ -49,6 +49,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 	private TextView text2;
 	private TextView odleglosc;
+	private TextView sredniapr;
 	public static final String EXTRA_TITLE = "pl.kasperdubiel.gpswersja2.EXTRA_TITLE";
 	public static final String EXTRA_DESCRIPTION = "pl.kasperdubiel.gpswersja2.EXTRA_DESCRIPTION";
 	public static final String EXTRA_PRIORITY = "pl.kasperdubiel.gpswersja2.EXTRA_PRIORITY";
@@ -74,6 +75,7 @@ public class AddNoteActivity extends AppCompatActivity
 		text1 = findViewById(R.id.szerr);
 		text2 = findViewById(R.id.wysoo);
 		odleglosc = findViewById(R.id.odleglosc);
+		sredniapr=findViewById(R.id.srednia);
 		editTextTitle = findViewById(R.id.edit_text_title);
 		editTextDescription = findViewById(R.id.edit_text_description);
 
@@ -108,13 +110,21 @@ public class AddNoteActivity extends AppCompatActivity
 					liczenieodleglosc();
 				}
 			}
-			odleglosc.setText(Double.toString(dystans));
+			odleglosc.setText(Double.toString(dystans)+" m");
+			timexxx=bundle.getLong("zzzz");
 			xl = xn;
 			yl = yn;
 			zmienna++;
 			ilo = bundle.getInt("ilo");
 			time1x = bundle.getLong("z");
 			time2x = bundle.getLong("a");
+			double czas=timexxx-time1x;
+			if (czas!=0)
+			{
+				double sredniaaa = dystans / czas * 1000;
+				sredniapr.setText(Double.toString(sredniaaa)+"m/s");
+			}
+
 
 			incr++;
 			/*
