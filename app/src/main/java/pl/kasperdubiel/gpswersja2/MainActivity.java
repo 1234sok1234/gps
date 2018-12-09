@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 	Calendar time1, time2;
 	long time1x, time2x;
 	public static final int ADD_NOTE_REQUEST = 1;
+	private GpsRepository repository1;
 
 
 	@Override
@@ -64,7 +65,9 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setHasFixedSize(true);
 		final NoteAdapter adapter = new NoteAdapter();
 		recyclerView.setAdapter(adapter);
-
+		//repository1.insert(new Gps(23d, 123d, 123));
+		//repository1.getAllGps();
+		//Gps curren=getItem(0);
 		noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
 		noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>()
 		{
@@ -145,7 +148,7 @@ public class MainActivity extends AppCompatActivity
 		{
 			case R.id.delete_all_notes:
 				noteViewModel.deleteAllNotes();
-				noteViewModel.deleteAllGps();
+				//noteViewModel.deleteAllGps();
 				Toast.makeText(this, "All workouts deleted", Toast.LENGTH_SHORT).show();
 				return true;
 			default:

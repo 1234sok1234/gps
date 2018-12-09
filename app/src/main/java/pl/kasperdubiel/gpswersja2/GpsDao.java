@@ -26,6 +26,6 @@ public interface GpsDao
 	@Query("DELETE From gps_table")
 	void deleteAllGps();
 
-	@Query("SELECT * FROM gps_table ORDER BY id DESC")
-	LiveData<List<Gps>> getAllGps();
+	@Query("SELECT * FROM gps_table")
+	List<Gps> getAllGps();
 }

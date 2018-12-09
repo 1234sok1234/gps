@@ -13,11 +13,13 @@ public class Gps
 	private int id;
 	private Double wyso;
 	private Double szer;
+	private Double czas;
 
-	public Gps(Double wyso, Double szer)
+	public Gps(Double wyso, Double szer,double czas)
 	{
 		this.wyso = wyso;
 		this.szer = szer;
+		this.czas=czas;
 	}
 
 	public void setId(int id)
@@ -38,6 +40,11 @@ public class Gps
 	public Double getSzer()
 	{
 		return szer;
+	}
+
+	public Double getCzas()
+	{
+		return czas;
 	}
 //komentarz
 

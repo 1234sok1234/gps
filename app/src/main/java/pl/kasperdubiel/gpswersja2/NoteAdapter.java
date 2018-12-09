@@ -57,7 +57,8 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		time2x=currentNote.getTime2();
 		time1.setTimeInMillis(time1x);
 		time2.setTimeInMillis(time2x);
-		long diff=time2x-time1x;
+		long diff=time2x-time1x-3600000;
+		long difff=time2x-time1x;
 		long diffSeconds = diff / 1000;
 
 		// Calculate difference in minutes
@@ -68,15 +69,19 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 
 		// Calculate difference in days
 		long diffDays = diff / (24 * 60 * 60 * 1000);
+		//String.format("%1$tH:%1$tM:%1$tS.%1$tL", diff);
+
+		holder.textViewPosix.setText("Time:"+String.format("%1$tH:%1$tM:%1$tS", diff));
 		holder.textViewTitle.setText(currentNote.getTitle());
 		holder.textViewDescription.setText(currentNote.getDescription());
 		holder.textViewPriority.setText("Priority: "+String.valueOf(currentNote.getPriority()));
 		holder.textViewPosi.setText("Distance: "+String.valueOf(currentNote.getPosi())+"m");
-		holder.textViewPosix.setText("Time: "+diffDays+"days,"+diffHours+"hours,"+diffMinutes+"minutes,"+diffSeconds+"seconds");
+		//holder.textViewPosix.setText("Time: "+diffDays+"days,"+diffHours+"hours,"+diffMinutes+"minutes,"+diffSeconds+"seconds");
 		SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d, yyyy 'at' h:mm:s a");
 		holder.textViewyy.setText("Started at: "+format.format(time1.getTime()));
 		holder.textViewPosi2.setText("Stopped at: "+format.format(time2.getTime()));
 		holder.textViewPax.setText("Interval: "+String.valueOf(currentNote.getCzestotli())+" ms");
+		holder.textViewSred.setText("Average speed: "+currentNote.getPosi()/difff*1000+" m/s");
 	}
 
 /*
@@ -92,6 +97,9 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 	{
 		return getItem(positon);
 	}
+
+
+
 	class NoteHolder extends RecyclerView.ViewHolder
 	{
 		private TextView textViewTitle;
@@ -102,6 +110,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		private TextView textViewPosi2;
 		private TextView textViewyy;
 		private TextView textViewPax;
+		private TextView textViewSred;
 
 		public NoteHolder(View itemView)
 		{
@@ -114,6 +123,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 			textViewyy=itemView.findViewById(R.id.text_view_yy);
 			textViewPosi2=itemView.findViewById(R.id.text_view_posi2);
 			textViewPax=itemView.findViewById(R.id.text_view_pax);
+			textViewSred=itemView.findViewById(R.id.text_view_sred);
 
 		}
 	}

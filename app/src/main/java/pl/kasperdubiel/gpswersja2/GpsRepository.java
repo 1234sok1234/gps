@@ -14,7 +14,7 @@ import pl.kasperdubiel.gpswersja2.NoteDatabase;
 public class GpsRepository
 {
 	private GpsDao gpsDao;
-	private LiveData<List<Gps>> allGps;
+	private List<Gps> allGps;
 
 
 	public GpsRepository(Application application)
@@ -45,7 +45,8 @@ public class GpsRepository
 	{
 		new DeleteAllGpsAsyncTask(gpsDao).execute();
 	}
-	public LiveData<List<Gps>> getAllGps()
+
+	public List<Gps> getAllGps()
 	{
 		return allGps;
 	}
