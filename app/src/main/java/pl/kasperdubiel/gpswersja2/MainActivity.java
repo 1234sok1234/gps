@@ -114,6 +114,15 @@ public class MainActivity extends AppCompatActivity
 			time1x = data.getLongExtra(AddNoteActivity.EXTRA_TIME1X, 1);
 			Log.e(TAG, Long.toString(time1x));
 			List<Gps> jnasd=NoteDatabase.getInstance(this).gpsDao().getAllGps();
+			for(int xc=0;xc<jnasd.size();xc++)
+			{
+				jnasd.get(xc).getWyso();
+				Log.e(TAG, "llllllllllllll");
+				Log.e(TAG, Double.toString(jnasd.get(xc).getWyso())+" "+Double.toString(jnasd.get(xc).getSzer())+" "+Double.toString(jnasd.get(xc).getCzas())+" "+Double.toString(jnasd.get(xc).getPren()));
+
+			}
+			Log.e(TAG, Integer.toString(jnasd.size()));
+
 			NoteDatabase.getInstance(this).gpsDao().deleteAllGps();
 			Log.e(TAG, "zzzzzzzzzzzzzzzzzzzzzzzzz");
 			Log.e(TAG, "");

@@ -26,6 +26,7 @@ import java.sql.Time;
 import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
+import static android.location.LocationManager.GPS_PROVIDER;
 import static android.support.constraint.Constraints.TAG;
 import static pl.kasperdubiel.gpswersja2.App.CHANNEL_ID;
 
@@ -36,9 +37,10 @@ public class BackgroudService extends Service
 	private int LOCATION_INTERVAL = 1000;
 	private static final float LOCATION_DISTANCE = 10f;
 	Calendar cal = Calendar.getInstance();
-	Calendar time1,time2,times;
-	long time1x,time2x,timesx;
-int ilo=0;
+	Calendar time1, time2, times;
+	long time1x, time2x, timesx;
+	double lat, lon, oldlat, oldlon;
+	int ilo = 0;
 	int millisecond;
 	int second;
 	double roznica, x1, x2;
@@ -64,22 +66,25 @@ int ilo=0;
 		public void onLocationChanged(Location location)
 		{
 			ilo++;
-			Intent intent  = new Intent("1");
-			intent.putExtra("x",location.getLatitude());
-			intent.putExtra("y",location.getLongitude());
-			x1=location.getLatitude();
-			x2=location.getLongitude();
+			Intent intent = new Intent("1");
+			lat = location.getLatitude();
+			lon = location.getLongitude();
+			intent.putExtra("x", lat);
+			intent.putExtra("y", lon);
+			//x1 = location.getLatitude();
+			//x2 = location.getLongitude();
 			times = Calendar.getInstance();
-			timesx=times.getTimeInMillis();
-			intent.putExtra("z",time1x);
-			intent.putExtra("a",time2x);
-			intent.putExtra("zzzz",timesx);
-			intent.putExtra("ilo",ilo);
+			timesx = times.getTimeInMillis();
+			intent.putExtra("z", time1x);
+			intent.putExtra("a", time2x);
+			intent.putExtra("zzzz", timesx);
+			intent.putExtra("ilo", ilo);
 			//float[] res=new float[2];
 			//location.distanceBetween(50.3338376,19.1128589,50.28033551941361,18.683018812109367,res);
-			Log.e(TAG, " sssssssssssssssssssssssssssss");
+			Log.e(TAG, " sssssssssssssssssssssssssssssxxxxxxx");
+			Log.e(TAG, Integer.toString(ilo));
 			//Log.e(TAG, Float.toString(res[0])+" "+Float.toString(res[1]));
-			Log.e(TAG, " sssssssssssssssssssssssssssss");
+			Log.e(TAG, " sssssssssssssssssssssssssssssxxxxxxx");
 			sendBroadcast(intent);
 			cal = Calendar.getInstance();
 			second = cal.get(Calendar.SECOND);
@@ -89,7 +94,17 @@ int ilo=0;
 			//Log.e(TAG, "onLocationChanged: " + location.getLatitude() + " " + location.getLongitude());
 			//Gps gps=new Gps(location.getLatitude(),location.getLongitude());
 			//noteViewModel.insert(gps);
-
+			if(ilo!=1)
+			{
+				double prennn = odleglosc();
+				NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(lat, lon, timesx, prennn));
+			}
+			else
+			{
+				NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(lat, lon, timesx, 0d));
+			}
+			oldlat = lat;
+			oldlon = lon;
 			mLastLocation.set(location);
 		}
 
@@ -150,7 +165,7 @@ int ilo=0;
 			Log.d(TAG, "gps provider does not exist " + ex.getMessage());
 		}
 		time1 = Calendar.getInstance();
-		time1x=time1.getTimeInMillis();
+		time1x = time1.getTimeInMillis();
 		String input = intent.getStringExtra("inputExtra");
 		Intent notificationIntent = new Intent(this, MainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -171,25 +186,19 @@ int ilo=0;
 	public void onDestroy()
 	{
 		time2 = Calendar.getInstance();
-		time2x=time2.getTimeInMillis();
+		time2x = time2.getTimeInMillis();
 
 
-
-		Intent intent  = new Intent("1");
-		intent.putExtra("x",x1);
-		intent.putExtra("y",x2);
-		intent.putExtra("z",time1x);
-		intent.putExtra("a",time2x);
-		boolean a=true;
-		intent.putExtra("stop",a);
+		Intent intent = new Intent("1");
+		intent.putExtra("x", x1);
+		intent.putExtra("y", x2);
+		intent.putExtra("z", time1x);
+		intent.putExtra("a", time2x);
+		boolean a = true;
+		intent.putExtra("stop", a);
 
 		Log.e(TAG, " ssssssssssssssswyslano??===============sssss");
 		sendBroadcast(intent);
-
-
-
-
-
 
 
 		Log.e(TAG, "onDestroy");
@@ -228,5 +237,18 @@ int ilo=0;
 	public void poczatek()
 	{
 
+	}
+
+	public double odleglosc()
+	{
+		Location mLastLocation = new Location(GPS_PROVIDER);
+
+		double x1x2;
+		float[] res = new float[3];
+		mLastLocation.distanceBetween(oldlat, oldlon, lat, lon, res);
+
+
+		x1x2 = res[0];
+		return x1x2;
 	}
 }

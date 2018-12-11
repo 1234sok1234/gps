@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Note.class, Gps.class}, version = 8)
+@Database(entities = {Note.class, Gps.class}, version = 9)
 public abstract class NoteDatabase extends RoomDatabase
 {
 	private static NoteDatabase instance;
@@ -51,7 +51,7 @@ public abstract class NoteDatabase extends RoomDatabase
 		protected Void doInBackground(Void... voids)
 		{
 			noteDao.insert(new Note("Title 1", "Description 1", 1, 5d, 5d, "asdas", 20l, 123l, 123));
-			gpsDao.insert(new Gps(12d, 123d, 13d));
+			gpsDao.insert(new Gps(12d, 123d, 13d,123d));
 
 
 			return null;

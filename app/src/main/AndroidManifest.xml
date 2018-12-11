@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".AddNoteActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">
         </activity>
 

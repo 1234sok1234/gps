@@ -118,7 +118,7 @@ public class AddNoteActivity extends AppCompatActivity
 			ilo = bundle.getInt("ilo");
 			time1x = bundle.getLong("z");
 			time2x = bundle.getLong("a");
-			NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(123d,123d,123d));
+			//NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(123d,123d,123d));
 			double czas=timexxx-time1x;
 			if (czas!=0)
 			{
@@ -256,7 +256,7 @@ public class AddNoteActivity extends AppCompatActivity
 	{
 		Location mLastLocation = new Location(GPS_PROVIDER);
 		double odleglos = 0;
-		float[] res = new float[2];
+		float[] res = new float[3];
 		mLastLocation.distanceBetween(xl, yl, xn, yn, res);
 		Log.e("ascsa", " sssssssssssssssssssssssssssss");
 		Log.e("casdc", Double.toString(xl));
