@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity
 			List<Gps> jnasd=NoteDatabase.getInstance(this).gpsDao().getAllGps();
 			for(int xc=0;xc<jnasd.size();xc++)
 			{
-				jnasd.get(xc).getWyso();
+				//jnasd.get(xc).getWyso();
 				Log.e(TAG, "llllllllllllll");
 				Log.e(TAG, Double.toString(jnasd.get(xc).getWyso())+" "+Double.toString(jnasd.get(xc).getSzer())+" "+Double.toString(jnasd.get(xc).getCzas())+" "+Double.toString(jnasd.get(xc).getPren()));
 
