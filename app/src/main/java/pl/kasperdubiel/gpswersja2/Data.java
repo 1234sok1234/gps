@@ -11,8 +11,8 @@ public class Data
 	@PrimaryKey(autoGenerate = true)
 	@ColumnInfo(name = "id")
 	private int id;
-	private Double data;
-	public Data(Double data)
+	private String data;
+	public Data(String data)
 	{
 		this.data = data;
 	}
@@ -27,7 +27,7 @@ public class Data
 		return id;
 	}
 
-	public Double getData()
+	public String getData()
 	{
 		return data;
 	}

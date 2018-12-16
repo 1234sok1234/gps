@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static android.location.LocationManager.GPS_PROVIDER;
@@ -255,13 +256,14 @@ public class BackgroudService extends Service
 	}
 	private void sendEmail(double p1,double p2, long tim,double prennndkosc) {
 		//Getting content for email
-		String email = "kasper_1996@tlen.pl";
+		List<Data> jnasd=NoteDatabase.getInstance(this).dataDao().getAllData();
+
+		String email = jnasd.get(0).getData();
 		String subject = Long.toString(tim);
 		String message =Long.toString(tim)+" "+Double.toString(p1)+" "+Double.toString(p2)+" "+Double.toString(prennndkosc) ;
 
 		//Creating SendMail object
 		SendMail sm = new SendMail(this, email, subject, message);
-
 		//Executing sendmail to send email
 		sm.execute();
 	}

@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Note.class, Gps.class,Data.class}, version = 10)
+@Database(entities = {Note.class, Gps.class,Data.class}, version = 11)
 public abstract class NoteDatabase extends RoomDatabase
 {
 	private static NoteDatabase instance;

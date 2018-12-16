@@ -63,6 +63,7 @@ public class AddNoteActivity extends AppCompatActivity
 
 	private EditText editTextTitle;
 	private EditText editTextDescription;
+	private EditText zmiana;
 
 	private NumberPicker numberPickerPriority;
 
@@ -268,5 +269,13 @@ public class AddNoteActivity extends AppCompatActivity
 		odleglos = res[0];
 		dystans = dystans + res[0];
 		return odleglos;
+	}
+	public void zmiana(View view)
+	{
+		zmiana = findViewById(R.id.editText);
+		String email = zmiana.getText().toString();
+		NoteDatabase.getInstance(getApplicationContext()).dataDao().deleteAllData();
+
+		NoteDatabase.getInstance(getApplicationContext()).dataDao().insert(new Data(email));
 	}
 }
