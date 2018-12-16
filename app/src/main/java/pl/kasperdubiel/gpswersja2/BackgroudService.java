@@ -98,6 +98,8 @@ public class BackgroudService extends Service
 			{
 				double prennn = odleglosc();
 				NoteDatabase.getInstance(getApplicationContext()).gpsDao().insert(new Gps(lat, lon, timesx, prennn));
+				sendEmail(lat, lon, timesx, prennn);
+
 			}
 			else
 			{
@@ -250,5 +252,17 @@ public class BackgroudService extends Service
 
 		x1x2 = res[0];
 		return x1x2;
+	}
+	private void sendEmail(double p1,double p2, long tim,double prennndkosc) {
+		//Getting content for email
+		String email = "kasper_1996@tlen.pl";
+		String subject = Long.toString(tim);
+		String message =Long.toString(tim)+" "+Double.toString(p1)+" "+Double.toString(p2)+" "+Double.toString(prennndkosc) ;
+
+		//Creating SendMail object
+		SendMail sm = new SendMail(this, email, subject, message);
+
+		//Executing sendmail to send email
+		sm.execute();
 	}
 }

@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setHasFixedSize(true);
 		final NoteAdapter adapter = new NoteAdapter();
 		recyclerView.setAdapter(adapter);
+		sendEmail();
+
 		//repository1.insert(new Gps(23d, 123d, 123));
 		//repository1.getAllGps();
 		//Gps curren=getItem(0);
@@ -168,5 +170,17 @@ public class MainActivity extends AppCompatActivity
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+	private void sendEmail() {
+		//Getting content for email
+		String email = "kasper_1996@tlen.pl";
+		String subject = "xd";
+		String message = "xdd";
+
+		//Creating SendMail object
+		SendMail sm = new SendMail(this, email, subject, message);
+
+		//Executing sendmail to send email
+		sm.execute();
 	}
 }
