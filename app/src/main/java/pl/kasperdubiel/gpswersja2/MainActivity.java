@@ -26,6 +26,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.List;
 
@@ -50,7 +57,6 @@ public class MainActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
 		buttonAddNote.setOnClickListener(new View.OnClickListener()
 		{
@@ -92,6 +98,8 @@ public class MainActivity extends AppCompatActivity
 			@Override
 			public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i)
 			{
+				delete("1.txt");
+				//viewHolder.getAdapterPosition();
 				noteViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
 				Toast.makeText(MainActivity.this, "deleted", Toast.LENGTH_SHORT).show();
 			}
@@ -114,16 +122,17 @@ public class MainActivity extends AppCompatActivity
 			int ilo = data.getIntExtra(AddNoteActivity.EXTRA_ILO, 1);
 			time1x = data.getLongExtra(AddNoteActivity.EXTRA_TIME1X, 1);
 			Log.e(TAG, Long.toString(time1x));
-			List<Gps> jnasd=NoteDatabase.getInstance(this).gpsDao().getAllGps();
-			for(int xc=0;xc<jnasd.size();xc++)
+			List<Gps> jnasd = NoteDatabase.getInstance(this).gpsDao().getAllGps();
+			for (int xc = 0; xc < jnasd.size(); xc++)
 			{
 				//jnasd.get(xc).getWyso();
 				Log.e(TAG, "llllllllllllll");
-				Log.e(TAG, Double.toString(jnasd.get(xc).getWyso())+" "+Double.toString(jnasd.get(xc).getSzer())+" "+Double.toString(jnasd.get(xc).getCzas())+" "+Double.toString(jnasd.get(xc).getPren()));
-
+				Log.e(TAG, Double.toString(jnasd.get(xc).getWyso()) + " " + Double.toString(jnasd.get(xc).getSzer()) + " " + Double.toString(jnasd.get(xc).getCzas()) + " " + Double.toString(jnasd.get(xc).getPren()));
+				save(Double.toString(jnasd.get(xc).getCzas()) + "\n", title+description+".txt");
+				save(Double.toString(jnasd.get(xc).getPren()) + "\n", title+description+".txt");
 			}
 			Log.e(TAG, Integer.toString(jnasd.size()));
-
+			load("1.txt");
 			NoteDatabase.getInstance(this).gpsDao().deleteAllGps();
 			Log.e(TAG, "zzzzzzzzzzzzzzzzzzzzzzzzz");
 			Log.e(TAG, "");
@@ -170,7 +179,9 @@ public class MainActivity extends AppCompatActivity
 				return super.onOptionsItemSelected(item);
 		}
 	}
-	private void sendEmail() {
+
+	private void sendEmail()
+	{
 		//Getting content for email
 		String email = "kasper_1996@tlen.pl";
 		String subject = "xd";
@@ -181,5 +192,92 @@ public class MainActivity extends AppCompatActivity
 
 		//Executing sendmail to send email
 		sm.execute();
+	}
+
+	public void save(String xd, String FILE_NAME)
+	{
+		FileOutputStream fos = null;
+		try
+		{
+			fos = openFileOutput(FILE_NAME, MODE_APPEND);
+			fos.write(xd.getBytes());
+
+			Log.e(TAG, "+++++++++++++++++++++++++");
+			Log.e(TAG, getFilesDir().getPath());
+
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			if (fos != null)
+			{
+				try
+				{
+					fos.close();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	public void load(String FILE_NAME)
+	{
+		FileInputStream fis = null;
+		try
+		{
+			fis = openFileInput(FILE_NAME);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			StringBuilder sb = new StringBuilder();
+			String text;
+			while ((text = br.readLine()) != null)
+			{
+				sb.append(text).append("\n");
+				Log.e(TAG, "===============");
+				Log.e(TAG, text);
+			}
+			Log.e(TAG, "-------------------------");
+			Log.e(TAG, sb.toString());
+
+
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			if (fis != null)
+			{
+				try
+				{
+					fis.close();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void delete(String filename)
+	{
+		File file = new File(getFilesDir(), filename);
+		if (file.exists())
+		{
+			deleteFile(filename);
+		} else
+		{
+
+		}
+
 	}
 }
