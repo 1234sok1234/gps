@@ -1,13 +1,18 @@
 package pl.kasperdubiel.gpswersja2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,9 +22,14 @@ import java.util.List;
 public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 {
 
-	public NoteAdapter()
+	private Context context;
+
+	public NoteAdapter(Context context)
 	{
+
 		super(DIFF_CALLBACK);
+		this.context = context;
+
 	}
 	private static final DiffUtil.ItemCallback<Note> DIFF_CALLBACK=new DiffUtil.ItemCallback<Note>()
 	{
@@ -52,7 +62,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		long time1x, time2x;
 		time1=Calendar.getInstance();
 		time2=Calendar.getInstance();
-		Note currentNote = getItem(position);
+		final Note currentNote = getItem(position);
 		time1x=currentNote.getTime1();
 		time2x=currentNote.getTime2();
 		time1.setTimeInMillis(time1x);
@@ -70,7 +80,20 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		// Calculate difference in days
 		long diffDays = diff / (24 * 60 * 60 * 1000);
 		//String.format("%1$tH:%1$tM:%1$tS.%1$tL", diff);
+holder.parent.setOnClickListener(new View.OnClickListener()
+{
+	@Override
+	public void onClick(View v)
+	{
+		Log.e("asdasd",currentNote.getTitle());
+		Log.e("asdasd", "jddddddddddddddddddd");
+		String nazwapliku=currentNote.getTitle()+currentNote.getDescription()+".txt";
+		Intent intent=new Intent(context,AddNoteActivity.class);
+		intent.putExtra("Filename", nazwapliku);
 
+		context.startActivity(intent);
+	}
+});
 		holder.textViewPosix.setText("Time:"+String.format("%1$tH:%1$tM:%1$tS", diff));
 		holder.textViewTitle.setText(currentNote.getTitle());
 		holder.textViewDescription.setText(currentNote.getDescription());
@@ -111,6 +134,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 		private TextView textViewyy;
 		private TextView textViewPax;
 		private TextView textViewSred;
+		CardView parent;
 
 		public NoteHolder(View itemView)
 		{
@@ -124,6 +148,7 @@ public class NoteAdapter extends ListAdapter<Note,NoteAdapter.NoteHolder>
 			textViewPosi2=itemView.findViewById(R.id.text_view_posi2);
 			textViewPax=itemView.findViewById(R.id.text_view_pax);
 			textViewSred=itemView.findViewById(R.id.text_view_sred);
+			parent=itemView.findViewById(R.id.parent);
 
 		}
 	}

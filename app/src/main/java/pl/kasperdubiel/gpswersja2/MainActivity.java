@@ -18,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -64,13 +65,14 @@ public class MainActivity extends AppCompatActivity
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
+
 				startActivityForResult(intent, ADD_NOTE_REQUEST);
 			}
 		});
 		RecyclerView recyclerView = findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setHasFixedSize(true);
-		final NoteAdapter adapter = new NoteAdapter();
+		final NoteAdapter adapter = new NoteAdapter(this);
 		recyclerView.setAdapter(adapter);
 		sendEmail();
 		//repository1.insert(new Gps(23d, 123d, 123));
@@ -163,6 +165,19 @@ public class MainActivity extends AppCompatActivity
 		MenuInflater menuInflater = getMenuInflater();
 		menuInflater.inflate(R.menu.main_menu, menu);
 		return true;
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+	{
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(1,1,1,"Pokaż wykres");
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item)
+	{
+		return super.onContextItemSelected(item);
 	}
 
 	@Override
