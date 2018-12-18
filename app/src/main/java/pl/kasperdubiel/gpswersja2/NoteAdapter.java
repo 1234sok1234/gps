@@ -88,7 +88,7 @@ holder.parent.setOnClickListener(new View.OnClickListener()
 		Log.e("asdasd",currentNote.getTitle());
 		Log.e("asdasd", "jddddddddddddddddddd");
 		String nazwapliku=currentNote.getTitle()+currentNote.getDescription()+".txt";
-		Intent intent=new Intent(context,AddNoteActivity.class);
+		Intent intent=new Intent(context,Chart.class);
 		intent.putExtra("Filename", nazwapliku);
 
 		context.startActivity(intent);
