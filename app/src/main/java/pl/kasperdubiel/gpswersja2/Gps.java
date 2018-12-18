@@ -13,10 +13,10 @@ public class Gps
 	private int id;
 	private Double wyso;
 	private Double szer;
-	private Double czas;
+	private Long czas;
 	private Double pren;
 
-	public Gps(Double wyso, Double szer,double czas,double pren)
+	public Gps(Double wyso, Double szer,Long czas,double pren)
 	{
 		this.wyso = wyso;
 		this.szer = szer;
@@ -44,7 +44,7 @@ public class Gps
 		return szer;
 	}
 
-	public Double getCzas()
+	public Long getCzas()
 	{
 		return czas;
 	}

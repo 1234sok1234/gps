@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
 		recyclerView.setHasFixedSize(true);
 		final NoteAdapter adapter = new NoteAdapter(this);
 		recyclerView.setAdapter(adapter);
-		sendEmail();
+		//sendEmail();
 		//repository1.insert(new Gps(23d, 123d, 123));
 		//repository1.getAllGps();
 		//Gps curren=getItem(0);
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity
 			for (int xc = 0; xc < jnasd.size(); xc++)
 			{
 				//jnasd.get(xc).getWyso();
-				Log.e(TAG, "llllllllllllll");
+				//Log.e(TAG, "llllllllllllll");
 				Log.e(TAG, Double.toString(jnasd.get(xc).getWyso()) + " " + Double.toString(jnasd.get(xc).getSzer()) + " " + Double.toString(jnasd.get(xc).getCzas()) + " " + Double.toString(jnasd.get(xc).getPren()));
-				save(Double.toString(jnasd.get(xc).getCzas()) + "\n", title+description+".txt");
+				save(Long.toString(jnasd.get(xc).getCzas()) + "\n", title+description+".txt");
 				save(Double.toString(jnasd.get(xc).getPren()) + "\n", title+description+".txt");
 			}
 			Log.e(TAG, Integer.toString(jnasd.size()));
@@ -218,7 +218,8 @@ public class MainActivity extends AppCompatActivity
 			fos.write(xd.getBytes());
 
 			Log.e(TAG, "+++++++++++++++++++++++++");
-			Log.e(TAG, getFilesDir().getPath());
+			Log.e(TAG, xd);
+			//Log.e(TAG, getFilesDir().getPath());
 
 		} catch (FileNotFoundException e)
 		{
